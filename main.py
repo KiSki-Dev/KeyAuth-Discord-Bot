@@ -7,6 +7,7 @@ intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
+discord_token = ""
 name = ""
 ownerid = ""
 
@@ -78,4 +79,4 @@ async def on_ready():
     await tree.sync(guild=discord.Object(id=1171187810162716673))
     print("Bot is ready!")
 
-client.run('MTE5MzM0NDQ0MDk2Njg0NDQ2Ng.GdA65j.X3POQwGGWUlGf6R2VJE5sYjdyc-5DzTI5LthLA')
+client.run(discord_token)
