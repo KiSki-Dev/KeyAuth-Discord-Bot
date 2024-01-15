@@ -3,11 +3,13 @@
 
 ## Features:
 - **Create a Account using Username, Password and License**
-- **Give the Account a Note with the Discord ID (In Process)**
+- **Give the Account a Note with the Discord ID**
 - **Get the Status of the Products (Online, Offline, ...)**
+- **Easy Help Page**
+- **Logging System**
 
 ## Informations
 **I started with this Project, because a good friend asked me to make it for him.**
 
 ### [![](https://dcbadge.vercel.app/api/server/mCJwUAcXFs?style=flat)](https://discord.gg/mCJwUAcXFs) 
-### [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/KiSki-Dev/WarLands/blob/master/LICENSE.md)
+### [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
