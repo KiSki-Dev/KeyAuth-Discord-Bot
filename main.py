@@ -12,17 +12,16 @@ tree = app_commands.CommandTree(client)
 
 
 # Configuration
-discord_token = ""
+discord_token = "MTE5MzM0NDQ0MDk2Njg0NDQ2Ng.Gt-mWW.nU871rTBqqr4P8WhZ7-qPinrsd9MxZaJYWgpho"
 # KeyAuth
-name = ""
-owner_id = ""
-sellerkey = ""
+name = "PlayzZ.dev"
+owner_id = "9IaA4QyLgA"
+sellerkey = "e4def4ef61f7d74e5978254888024164"
 # Discord
-log_id = 123
-allowed_id = 123
-customer_id = 123
-guild_id = 123
-
+log_id = 1186289544195211264
+allowed_id = 1186289544195211264
+customer_id = 1171504691046268988
+guild_id = 1171187810162716673
 
 
 
@@ -127,6 +126,7 @@ async def register_command(interaction, username: str, password: str, license: s
     app_commands.Choice(name="Fortnite", value="Fortnite"),])
 async def status_command(interaction, choices: app_commands.Choice[str]):        
     await interaction.response.send_message(embed=discord.Embed(title="Recieving Status is currently in progress...", color=0xff9600), ephemeral=True)
+    await client.change_presence(activity=discord.Game(name="secretexploits.xyz"))
 
     if interaction.channel.id == allowed_id:
 
@@ -189,6 +189,9 @@ def status(program):
     elif status.lower() == "updating":
         full_state = f"🟠 : We are Updating {program} at the moment."
         state = "🟠 : Updating"
+        color = 0xff6400
+    elif status.lower() == "unkown":
+        full_state = f"🟠 : We are checking the Status of {program} at the moment."
         color = 0xff6400
     else:
         full_state = f"🔴 : A Error happend while recieving the Status of {program}."
