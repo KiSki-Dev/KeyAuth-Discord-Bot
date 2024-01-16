@@ -12,16 +12,16 @@ tree = app_commands.CommandTree(client)
 
 
 # Configuration
-discord_token = "MTE5MzM0NDQ0MDk2Njg0NDQ2Ng.Gt-mWW.nU871rTBqqr4P8WhZ7-qPinrsd9MxZaJYWgpho"
+discord_token = ""
 # KeyAuth
-name = "PlayzZ.dev"
-owner_id = "9IaA4QyLgA"
-sellerkey = "e4def4ef61f7d74e5978254888024164"
+name = ""
+owner_id = ""
+sellerkey = ""
 # Discord
-log_id = 1186289544195211264
-allowed_id = 1186289544195211264
-customer_id = 1171504691046268988
-guild_id = 1171187810162716673
+log_id = 123
+allowed_id = 123
+customer_id = 123
+guild_id = 123
 
 
 
