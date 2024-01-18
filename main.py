@@ -61,7 +61,7 @@ async def register_command(interaction, username: str, password: str, license: s
             embedComp.add_field(name="Password", value=password, inline=True)
             embedComp.add_field(name="License", value=license, inline=False)
             embedComp.add_field(name="Duration", value=f"{dur_str} Days", inline=False)
-
+            embedComp.set_footer(text="Made by KiSki-Dev with ❤")
             await interaction.followup.send(embed=embedComp, ephemeral=True)
 
             embedLog=discord.Embed(title="Registration made!", color=0x00aaff)
@@ -126,36 +126,30 @@ async def register_command(interaction, username: str, password: str, license: s
     app_commands.Choice(name="Fortnite", value="Fortnite"),])
 async def status_command(interaction, choices: app_commands.Choice[str]):        
     await interaction.response.send_message(embed=discord.Embed(title="Recieving Status is currently in progress...", color=0xff9600), ephemeral=True)
-    await client.change_presence(activity=discord.Game(name="secretexploits.xyz"))
+    await client.change_presence(activity=discord.Game(name="github.com/KiSki-Dev"))
 
-    if interaction.channel.id == allowed_id:
+    choice = choices.value
 
-        choice = choices.value
+    a_state, a_full_state, a_color = status("Auth")
+    cs_state, cs_full_state, cs_color = status("CS2")
+    fn_state, fn_full_state, fn_color = status("Fortnite")
 
-        a_state, a_full_state, a_color = status("Auth")
-        cs_state, cs_full_state, cs_color = status("CS2")
-        fn_state, fn_full_state, fn_color = status("Fortnite")
+    if choice == "all":
+        embedComp=discord.Embed(title="All Statuses!", color=0x0000ff)
+        embedComp.add_field(name="Auth", value=a_state, inline=False)
+        embedComp.add_field(name="CS2", value=cs_state, inline=False)
+        embedComp.add_field(name="Fortnite", value=fn_state, inline=False)
 
-        if choice == "all":
-            embedComp=discord.Embed(title="All Statuses!", color=0x0000ff)
-            embedComp.add_field(name="Auth", value=a_state, inline=False)
-            embedComp.add_field(name="CS2", value=cs_state, inline=False)
-            embedComp.add_field(name="Fortnite", value=fn_state, inline=False)
-
-            await interaction.followup.send(embed=embedComp)
-        elif choice == "Auth":
+        await interaction.followup.send(embed=embedComp, ephemeral=True)
+    elif choice == "Auth":
             embedComp=discord.Embed(title=a_full_state, color=a_color)
-            await interaction.followup.send(embed=embedComp)
-        elif choice == "CS2":
-            embedComp=discord.Embed(title=cs_full_state, color=cs_color)
-            await interaction.followup.send(embed=embedComp)
-        elif choice == "Fortnite":
-            embedComp=discord.Embed(title=fn_full_state, color=fn_color)
-            await interaction.followup.send(embed=embedComp)
-    else:
-        embedErr=discord.Embed(title="Wrong Channel!", color=0xff0000)
-        embedErr.add_field(name="Please use the correct Channel.", value=f"Please use it in <#{allowed_id}>", inline=True)
-        await interaction.followup.send(embed=embedErr, ephemeral=True)
+            await interaction.followup.send(embed=embedComp, ephemeral=True)
+    elif choice == "CS2":
+        embedComp=discord.Embed(title=cs_full_state, color=cs_color)
+        await interaction.followup.send(embed=embedComp, ephemeral=True)
+    elif choice == "Fortnite":
+        embedComp=discord.Embed(title=fn_full_state, color=fn_color)
+        await interaction.followup.send(embed=embedComp, ephemeral=True)
 
 
 def status(program):
@@ -202,28 +196,28 @@ def status(program):
 
 
 
-embedReg=discord.Embed(title="Help - Register", color=0x009dff)
-embedReg.add_field(name="Create a Account", value="using the Register Command.", inline=False)
-embedReg.add_field(name="Requirements:", value="Unique Username, Good Password, Working License", inline=False)
-embedReg.add_field(name="Instructions", value='Write "**/register**". You should get a Suggestion for the Command. Enter your desired Username, then enter a strong Password. Now you enter your bought License-Key.', inline=False)
-embedReg.add_field(name="Lost Login Data?", value="If you lost any Login-Data or you want to reset your HWID, then contact our Support. We can proof that you actually own a Account.", inline=True)
-embedSta=discord.Embed(title="Help - Status", color=0xff00d0)
-embedSta.add_field(name="Get the Status", value="using the Status Command.", inline=False)
-embedSta.add_field(name="You cant login? Or the Cheat doesnt work?", value="Then you should run the Status Command. Using the Status Command you can see what in our System works and what does not.", inline=False)
-embedMo=discord.Embed(title="Help - More", color=0xff9600)
-embedMo.add_field(name="Any Other Informations", value="you can see here.", inline=False)
-embedMo.add_field(name="Found a Bug?", value='If you found a Bug please directly report it to the Support or the [Bot Developer "KiSki-Dev"](https://github.com/KiSki-Dev).', inline=False)
-embedMo.add_field(name="Like the Bot?", value='If you like the Bot, the Bot-Developer "KiSki-Dev" would really appreciate, if you check out his [GitHub](https://github.com/KiSki-Dev).', inline=False)
-embedMo.add_field(name="Missing some Features?", value="We are working to constantly adding and upgrading Features. If you miss any Feature, contact the Support and tell them your Idea.", inline=False)
+embedRegister=discord.Embed(title="Help - Register", color=0x009dff)
+embedRegister.add_field(name="Create a Account", value="using the Register Command.", inline=False)
+embedRegister.add_field(name="Requirements:", value="Unique Username, Good Password, Working License", inline=False)
+embedRegister.add_field(name="Instructions", value='Write "**/register**". You should get a Suggestion for the Command. Enter your desired Username, then enter a strong Password. Now you enter your bought License-Key.', inline=False)
+embedRegister.add_field(name="Lost Login Data?", value="If you lost any Login-Data or you want to reset your HWID, then contact our Support. We can proof that you actually own a Account.", inline=True)
+embedStatus=discord.Embed(title="Help - Status", color=0xff00d0)
+embedStatus.add_field(name="Get the Status", value="using the Status Command.", inline=False)
+embedStatus.add_field(name="You cant login? Or the Cheat doesnt work?", value="Then you should run the Status Command. Using the Status Command you can see what in our System works and what does not.", inline=False)
+embedMore=discord.Embed(title="Help - More", color=0xff9600)
+embedMore.add_field(name="Any Other Informations", value="you can see here.", inline=False)
+embedMore.add_field(name="Found a Bug?", value='If you found a Bug please directly report it to the Support or the [Bot Developer "KiSki-Dev"](https://github.com/KiSki-Dev).', inline=False)
+embedMore.add_field(name="Like the Bot?", value='If you like the Bot, the Bot-Developer "KiSki-Dev" would really appreciate, if you check out his [GitHub](https://github.com/KiSki-Dev).', inline=False)
+embedMore.add_field(name="Missing some Features?", value="We are working to constantly adding and upgrading Features. If you miss any Feature, contact the Support and tell them your Idea.", inline=False)
 
 @tree.command(
     name="help",
     description="List all Commands.",
     guild=discord.Object(id=guild_id))
 async def help_command(interaction):        
-    await interaction.response.send_message(embed=embedReg)
-    await interaction.followup.send(embed=embedSta)
-    await interaction.followup.send(embed=embedMo)
+    await interaction.response.send_message(embed=embedRegister, ephemeral=True)
+    await interaction.followup.send(embed=embedStatus, ephemeral=True)
+    await interaction.followup.send(embed=embedMore, ephemeral=True)
 
 
 @client.event
