@@ -1,5 +1,3 @@
-# CODE WRITTEN BY KiSki-Dev : https://github.com/KiSki-Dev
-
 import discord
 from discord import app_commands
 import requests
@@ -12,12 +10,13 @@ tree = app_commands.CommandTree(client)
 
 
 # Configuration
-discord_token = ""
+
 # KeyAuth
 name = ""
 owner_id = ""
 sellerkey = ""
 # Discord
+discord_token = ""
 log_id = 123
 allowed_id = 123
 customer_id = 123
@@ -116,14 +115,14 @@ async def register_command(interaction, username: str, password: str, license: s
 
 @tree.command(
     name="status",
-    description="Get the Status of the Cheats.",
+    description="Get the Status of Products.",
     guild=discord.Object(id=guild_id)
 )
 @app_commands.choices(choices=[
     app_commands.Choice(name="All", value="all"),
     app_commands.Choice(name="Auth", value="Auth"),
-    app_commands.Choice(name="CS2", value="CS2"),
-    app_commands.Choice(name="Fortnite", value="Fortnite"),])
+    app_commands.Choice(name="Main", value="Main"),
+    app_commands.Choice(name="Development", value="Development"),])
 async def status_command(interaction, choices: app_commands.Choice[str]):        
     await interaction.response.send_message(embed=discord.Embed(title="Recieving Status is currently in progress...", color=0xff9600), ephemeral=True)
     await client.change_presence(activity=discord.Game(name="github.com/KiSki-Dev"))
@@ -131,51 +130,43 @@ async def status_command(interaction, choices: app_commands.Choice[str]):
     choice = choices.value
 
     a_state, a_full_state, a_color = status("Auth")
-    cs_state, cs_full_state, cs_color = status("CS2")
-    fn_state, fn_full_state, fn_color = status("Fortnite")
+    main_state, main_full_state, main_color = status("Main")
+    dev_state, dev_full_state, dev_color = status("Development")
 
     if choice == "all":
         embedComp=discord.Embed(title="All Statuses!", color=0x0000ff)
         embedComp.add_field(name="Auth", value=a_state, inline=False)
-        embedComp.add_field(name="CS2", value=cs_state, inline=False)
-        embedComp.add_field(name="Fortnite", value=fn_state, inline=False)
+        embedComp.add_field(name="Main", value=main_state, inline=False)
+        embedComp.add_field(name="Development", value=dev_state, inline=False)
 
         await interaction.followup.send(embed=embedComp, ephemeral=True)
     elif choice == "Auth":
             embedComp=discord.Embed(title=a_full_state, color=a_color)
             await interaction.followup.send(embed=embedComp, ephemeral=True)
-    elif choice == "CS2":
-        embedComp=discord.Embed(title=cs_full_state, color=cs_color)
+    elif choice == "Main":
+        embedComp=discord.Embed(title=main_full_state, color=main_color)
         await interaction.followup.send(embed=embedComp, ephemeral=True)
-    elif choice == "Fortnite":
-        embedComp=discord.Embed(title=fn_full_state, color=fn_color)
+    elif choice == "Development":
+        embedComp=discord.Embed(title=dev_full_state, color=dev_color)
         await interaction.followup.send(embed=embedComp, ephemeral=True)
 
 
 def status(program):
     p = program.lower()
-    url = f"http://37.221.92.85:1337/status/get/{p}"
+    url = f"http://localhost:8080/status/get/{p}" # Change to your JSON/API-URL
     response = requests.get(url)
     data = response.json()
 
     status = data["status"]
 
-    if status.lower() == "detected":
-        full_state = f"🔴 : {program} is Detected. Be careful."
-        state = "🔴 : Detected"
-        color = 0xff0000
-    elif status.lower() == "undetected":
-        full_state = f"🟢 : {program} is Undetected."
-        state = "🟢 : Undetected"
-        color = 0x00ff00
-    elif status.lower() == "online":
-        full_state = f"🟢 : {program} is currently Online."
-        state = "🟢 : Online"
-        color = 0x00ff00
-    elif status.lower() == "offline":
-        full_state = f"🔴 : {program} is currently offline."
+    if status.lower() == "offline":
+        full_state = f"🔴 : {program} is Offline."
         state = "🔴 : Offline"
         color = 0xff0000
+    elif status.lower() == "online":
+        full_state = f"🟢 : {program} is Online."
+        state = "🟢 : Online"
+        color = 0x00ff00
     elif status.lower() == "testing":
         full_state = f"🟠 : We are Testing {program} at the moment."
         state = "🟠 : Testing"
