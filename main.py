@@ -18,11 +18,15 @@ sellerkey = ""
 # Discord
 discord_token = ""
 log_id = 123
-allowed_id = 123
-customer_id = 123
+allowed_id = 123 # ID of Channel where its allowed to use the Command
+customer_id = 123 # ID of Role for Customers
 guild_id = 123
-
-
+# Give spefic Role depending on Subscription
+spefic_Roles = [
+    {"name": "default", "value": 123},
+    {"name": "Main", "value": 123},
+    {"name": "Developer", "value": 123}
+]
 
 @tree.command(
     name="register",
@@ -72,7 +76,13 @@ async def register_command(interaction, username: str, password: str, license: s
 
             await log_channel.send(embed=embedLog)
 
-            role = interaction.guild.get_role(customer_id)
+            subscription = data["info"]["subscriptions"][0]["subscription"]
+            for pair in spefic_Roles:
+                if pair["name"] == subscription:
+                    custom_role = interaction.guild.get_role(pair["value"])
+                    await interaction.user.add_roles(custom_role)
+
+            role = interaction.guild.get_role(customer_id) # Add Customer Role
             await interaction.user.add_roles(role)
 
         elif status == False:
