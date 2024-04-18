@@ -4,6 +4,7 @@
 ## Features:
 - **Create a Account using Username, Password and License**
 - **Give the Account a Note with the Discord ID**
+- **Give Discord User a specific Role depending on their Subscription**
 - **Get the Status of the Products (Online, Offline, ...)**
 - **Easy Help Page**
 - **Logging System**
